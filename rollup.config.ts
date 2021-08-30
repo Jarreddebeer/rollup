@@ -88,6 +88,7 @@ export default (command: Record<string, unknown>): RollupOptions | RollupOptions
 			'fsevents',
 			'module',
 			'path',
+			'url',
 			'os',
 			'stream',
 			'url',

@@ -83,3 +83,11 @@ export function resolve(...paths: string[]): string {
 
 	return resolvedParts.join('/');
 }
+
+export function fileURLToPath(fileURL: string): string {
+	if (fileURL.indexOf('file:///') == 0) // win
+		return fileURL.substr('file:///'.length);
+	if (fileURL.indexOf('file://') == 0)
+		return fileURL.substr('file://'.length);
+	return fileURL;
+}

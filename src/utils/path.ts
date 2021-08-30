@@ -15,3 +15,4 @@ export function normalize(path: string): string {
 }
 
 export { basename, dirname, extname, relative, resolve } from 'path';
+export { fileURLToPath } from 'url';

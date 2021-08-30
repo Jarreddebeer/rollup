@@ -1,4 +1,4 @@
-import { basename, extname, isAbsolute, relative, resolve } from './path';
+import { basename, extname, isAbsolute, relative, resolve, fileURLToPath } from './path';
 
 export function getAliasName(id: string): string {
 	const base = basename(id);
@@ -6,8 +6,11 @@ export function getAliasName(id: string): string {
 }
 
 export default function relativeId(id: string): string {
-	if (!isAbsolute(id)) return id;
-	return relative(resolve(), id);
+	if (isAbsolute(id) || isURL(id)) {
+		const isFileURL = id.indexOf('file') == 0;
+		return relative(resolve(), (isFileURL) ? fileURLToPath(id) : id);
+	}
+	return id;
 }
 
 export function isPathFragment(name: string): boolean {
@@ -15,4 +18,13 @@ export function isPathFragment(name: string): boolean {
 	return (
 		name[0] === '/' || (name[0] === '.' && (name[1] === '/' || name[1] === '.')) || isAbsolute(name)
 	);
+}
+
+function isURL (specifier: string): boolean { 
+	try { 
+		new URL(specifier); 
+		return true;
+	} catch { 
+		return false;
+	} 
 }
