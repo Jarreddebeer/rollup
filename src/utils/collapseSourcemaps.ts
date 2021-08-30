@@ -7,7 +7,8 @@ import {
 	WarningHandler
 } from '../rollup/types';
 import { error } from './error';
-import { basename, dirname, relative, resolve } from './path';
+import { basename, dirname, resolve } from './path';
+import relative from './relative';
 
 class Source {
 	content: string;

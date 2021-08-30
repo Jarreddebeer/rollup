@@ -7,9 +7,10 @@ import {
 } from './rollup/types';
 import { EMPTY_ARRAY } from './utils/blank';
 import { makeLegal } from './utils/identifierHelpers';
-import { normalize, relative } from './utils/path';
+import { normalize } from './utils/path';
 import { printQuotedStringList } from './utils/printStringList';
 import relativeId from './utils/relativeId';
+import relative from './utils/relative';
 
 export default class ExternalModule {
 	chunk: void;

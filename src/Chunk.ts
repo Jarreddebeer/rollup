@@ -1,5 +1,5 @@
 import MagicString, { Bundle as MagicStringBundle, SourceMap } from 'magic-string';
-import { relative } from '../browser/path';
+import relative from './utils/relative';
 import ExternalModule from './ExternalModule';
 import Module from './Module';
 import ExportDefaultDeclaration from './ast/nodes/ExportDefaultDeclaration';

@@ -1,4 +1,5 @@
-import { basename, extname, isAbsolute, relative, resolve } from './path';
+import { basename, extname, isAbsolute, resolve } from './path';
+import relative from './relative';
 
 export function getAliasName(id: string): string {
 	const base = basename(id);
@@ -6,8 +7,10 @@ export function getAliasName(id: string): string {
 }
 
 export default function relativeId(id: string): string {
-	if (!isAbsolute(id)) return id;
-	return relative(resolve(), id);
+	if (isAbsolute(id) || isURL(id)) {
+		return relative(resolve(), id);
+	}
+	return id;
 }
 
 export function isPathFragment(name: string): boolean {
@@ -15,4 +18,13 @@ export function isPathFragment(name: string): boolean {
 	return (
 		name[0] === '/' || (name[0] === '.' && (name[1] === '/' || name[1] === '.')) || isAbsolute(name)
 	);
+}
+
+function isURL (specifier: string): boolean { 
+	try { 
+		new URL(specifier); 
+		return true;
+	} catch { 
+		return false;
+	} 
 }
